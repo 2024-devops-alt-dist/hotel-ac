@@ -1,0 +1,67 @@
+.diapo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.diapo {
+    width: 100%;
+}
+
+.diapo-inner {
+    display: flex;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    flex: 0 0 calc(100% / 3);
+    margin: 1rem;
+    /* Chaque boîte occupe un tiers de l'espace visible */
+    height: 150px;
+}
+
+.chevron {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2em;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.chevron-left {
+    left: 10px;
+}
+
+.chevron-right {
+    right: 10px;
+}
+
+.chevron:focus {
+    outline: none;
+}
+
+.chevron:hover {
+    color: #ddd;
+}
+
+.hotel-photo {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}

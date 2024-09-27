@@ -1,0 +1,84 @@
+body {
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bannerImg {
+    background-image: url(/public/hotelBanner1280.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+}
+
+
+.searchInput {
+    position: absolute;
+    top: 280px;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    display: flex;
+    border-radius: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.presentationTitle {
+    color: #fcd53f;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.presentationText {
+    color: white;
+    font-size: 1rem;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+
+    /* Styles pour tablettes */
+    .presentationText {
+        width: 70%;
+    }
+
+    .presentationTitle {
+        font-size: 1.5rem;
+    }
+
+    .presentationText {
+        font-size: 0.9rem;
+    }
+
+    .bannerImg {
+        height: 60vh;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* Styles pour smartphones */
+    .presentationText {
+        width: 90%;
+    }
+
+    .presentationTitle {
+        font-size: 1.2rem;
+    }
+
+    .presentationText {
+        font-size: 0.8rem;
+    }
+
+    .bannerImg {
+        height: 50vh;
+    }
+}
