@@ -10,6 +10,8 @@ function App() {
   const [etabs, setEtabs] = useState([]);
   const etabsCollectionRef = collection(db, "etablissement");
 
+  console.log("les etablissements", etabs);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getDocs(etabsCollectionRef);

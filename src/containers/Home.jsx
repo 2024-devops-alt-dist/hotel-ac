@@ -1,24 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/HomeStyle.css";
 import Header from "../components/Header";
 import Diapo from "../components/Diapo";
 import SearchEtab from "../components/SearchEtab";
-import { useState, useEffect } from "react";
 
-const Home = ({ etabs }) => {
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  useEffect(() => {}, [searchResults]);
-
+function Home({ etabs }) {
   return (
     <div className="home">
       <Header />
       <div className="presentation">
         <div className="bannerImg">
-          <div className="searchInput">
-            <SearchEtab />
-          </div>
+          <SearchEtab etabs={etabs} />
         </div>
         <h2 className="presentationTitle">Lorem Ipsum</h2>
         <p className="presentationText">
@@ -30,14 +22,11 @@ const Home = ({ etabs }) => {
       <div className="hotels">
         <h2 id="noshotels">NOS HÔTELS LES MIEUX NOTÉS</h2>
         <div className="hotel">
+          {/* FILTRER DANS LE DIAPO ? si oui ne pas oublier le useEffect  <Diapo etabs={searchResults} />{" "} */}
           <Diapo etabs={etabs} />
-          <img
-            src="https://images.unsplash.com/photo-1593642532937-7f9d6e1f0f0a"
-            alt="Hôtel de luxe"
-          />
           <h3>Find Us</h3>
           <p>
-            - soit mettre une carte avec plusieurs points avec google api - soit
+            - soit mettre une carte avec plusieurs points avec Google API - soit
             mettre une carte avec un seul point tranquillou
           </p>
         </div>
@@ -45,6 +34,6 @@ const Home = ({ etabs }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;

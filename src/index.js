@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 //actions
-import searchEtabSlice from "./redux/actions/searchEtabAction";
+import searchEtabsSlice from "./redux/actions/searchEtabAction";
 import App from "./App";
 import "./index.css";
 
@@ -16,7 +16,7 @@ import "./index.css";
 
 const store = configureStore({
   reducer: {
-    searchEtab: searchEtabSlice,
+    searchEtabs: searchEtabsSlice,
     //addEtab: addEtabSlice,
   },
 });

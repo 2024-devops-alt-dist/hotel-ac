@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from "react";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import {
-// faChevronLeft,
-// faChevronRight,
-//} from "@fortawesome/free-solid-svg-icons";
-import "../style/DiapoStyle.css";
-import {
-  searchEtab,
-  // searchEtabFailure,
-  //searchEtabLoading,
-} from "../redux/actions/searchEtabAction";
-import { useDispatch, useSelector } from "react-redux";
+//import { searchEtabSuccess } from "../redux/actions/searchEtabAction";
 
-function SearchEtab() {
-  const dispatch = useDispatch();
-  const etabs = useSelector((state) => state.searchEtab);
-  const store = useSelector((state) => state.searchEtab);
+function SearchEtab({ etabs }) {
+  //stocker la recherche de l'utilisateur
   const [search, setSearch] = useState("");
+  //stocker les résultats
   const [searchResults, setSearchResults] = useState([]);
-  const searchedEtab = store.searchEtab;
 
   useEffect(() => {
-    dispatch(searchEtab(searchResults));
-  }, [searchResults]);
+    if (search === "") {
+      console.log("etabs", etabs);
+      setSearchResults([]);
+    } else {
+      const filteredResults = etabs.filter((etab) =>
+        etab.nom.toLowerCase().includes(search.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+    }
+  }, [search, etabs]);
 
-  const handleChange = (e) => {
+  //MAJ valeur de recherche
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const results = etabs.filter((etab) => etab.name === search);
-    setSearchResults(results);
   };
 
   return (
     <div className="search-etab">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSearchChange}>
         <input
           type="text"
           value={search}
@@ -46,11 +36,18 @@ function SearchEtab() {
         <button type="submit">🔍</button>
       </form>
       <div className="search-results">
-        {searchedEtab.map((etab, index) => (
-          <div key={index}>
-            <h3>{etab.name}</h3>
-          </div>
-        ))}
+        {search === "" ? (
+          <p>Renseignez un établissement.</p>
+        ) : searchResults.length > 0 ? (
+          searchResults.map((etab, index) => (
+            <div key={index} className="search-result-item">
+              <h3>{etab.nom}</h3>
+              <p>{etab.adresse}</p>
+            </div>
+          ))
+        ) : (
+          <p>Aucun résultat trouvé.</p>
+        )}
       </div>
     </div>
   );
