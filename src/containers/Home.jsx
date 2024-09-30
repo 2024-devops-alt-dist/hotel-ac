@@ -3,11 +3,13 @@ import "../style/HomeStyle.css";
 import Header from "../components/Header";
 import Diapo from "../components/Diapo";
 import SearchEtab from "../components/SearchEtab";
+import SignUpModal from "../components/SignUpModal";
 
 function Home({ etabs }) {
   return (
     <div className="home">
       <Header />
+      <SignUpModal />
       <div className="presentation">
         <div className="bannerImg">
           <SearchEtab etabs={etabs} />

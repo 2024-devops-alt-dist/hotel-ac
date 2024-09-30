@@ -45,7 +45,6 @@ body {
 
 @media (max-width: 768px) {
 
-    /* Styles pour tablettes */
     .presentationText {
         width: 70%;
     }
@@ -65,7 +64,6 @@ body {
 
 @media (max-width: 576px) {
 
-    /* Styles pour smartphones */
     .presentationText {
         width: 90%;
     }

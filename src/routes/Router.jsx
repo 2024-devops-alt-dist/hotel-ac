@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../containers/Home";
 import Gerant from "../containers/Gerant";
 import Error from "../containers/Error404";
+import HotelsList from "../containers/HotelsList";
 
 const Router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const Router = createBrowserRouter([
   {
     path: "*",
     element: <Error />,
+  },
+  {
+    path: "/nosHotels",
+    element: <HotelsList />,
   },
 ]);
 
