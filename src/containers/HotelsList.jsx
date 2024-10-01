@@ -15,7 +15,7 @@ import { serializeFirestoreData } from "../firebase/firebaseUtils";
 
 function HotelsList() {
   const dispatch = useDispatch();
-  const { etabs, isLoading, error } = useSelector((state) => state.fetchEtabs); // Utilise le slice que tu as créé
+  const { etabs, isLoading, error } = useSelector((state) => state.fetchEtabs);
   // FETCH LES HOTELS DEPUIS FIREBASE
   useEffect(() => {
     const fetchHotels = async () => {
