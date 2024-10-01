@@ -19,6 +19,8 @@ const searchEtabsSlice = createSlice({
     },
     searchEtabSuccess: (state, action) => {
       console.log("state", state);
+      //ATTENTION AUX OBJETS NON SERIALIZABLES
+      // state.searchEtab = JSON.parse(JSON.stringify(action.payload));
       state.searchEtab = action.payload;
       state.isLoading = false;
     },

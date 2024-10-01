@@ -4,12 +4,16 @@ import Header from "../components/Header";
 import Diapo from "../components/Diapo";
 import SearchEtab from "../components/SearchEtab";
 import SignUpModal from "../components/SignUpModal";
+import Footer from "../components/Footer";
+// import SignInModal from "../components/SignInModal";
 
 function Home({ etabs }) {
   return (
     <div className="home">
       <Header />
       <SignUpModal />
+      {/* <SignInModal /> */}
+
       <div className="presentation">
         <div className="bannerImg">
           <SearchEtab etabs={etabs} />
@@ -33,6 +37,7 @@ function Home({ etabs }) {
           </p>
         </div>
         <div className="map"></div>
+        <Footer />
       </div>
     </div>
   );

@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-//FIREBASE
-import { db, auth } from "./firebase/firebase-config";
-import { collection, getDocs } from "firebase/firestore";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
 
-//COMPONENTS
+// FIREBASE
+import { db } from "./firebase/firebase-config";
+import { collection, getDocs } from "firebase/firestore";
+import { observeAuthState } from "./firebase/auth";
+
+// COMPONENTS
 import Home from "./containers/Home";
 import Gerant from "./containers/Gerant";
 import Error404 from "./containers/Error404";
 import HotelsList from "./containers/HotelsList";
-//import Header from "./components/Header";
 import Private from "./containers/private/Private";
 import PrivateHome from "./containers/private/privateHome/PrivateHome";
-import { current } from "@reduxjs/toolkit";
 
 function App() {
   const [etabs, setEtabs] = useState([]);
@@ -25,14 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
 
-  const signUp = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
-  const signIn = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
-
-  console.log("les etablissements", etabs);
-
-  //useEffect pour les établissements
+  // useEffect pour les etabs
   useEffect(() => {
     const fetchData = async () => {
       const data = await getDocs(etabsCollectionRef);
@@ -42,19 +30,12 @@ function App() {
     fetchData();
   }, []);
 
-  //useEffect pour l'authentification
+  // useEffect pour l'auth
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // user co => on stocke dans le state
-        setCurrentUser(user);
-      } else {
-        // Sinon, on réinitialise l user
-        setCurrentUser(null);
-      }
+    const unsubscribe = observeAuthState((user) => {
+      setCurrentUser(user);
     });
 
-    // nettoyer le useEffect
     return () => unsubscribe();
   }, []);
 

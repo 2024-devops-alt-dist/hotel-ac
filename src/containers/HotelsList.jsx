@@ -1,26 +1,73 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchEtabsStart,
+  fetchEtabsSuccess,
+  fetchEtabsFailure,
+} from "../redux/actions/etabAction";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebase-config";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import { getEtab } from "../firebase/EtabManager";
+
+import { serializeFirestoreData } from "../firebase/firebaseUtils";
 
 function HotelsList() {
+  const dispatch = useDispatch();
+  const { etabs, isLoading, error } = useSelector((state) => state.fetchEtabs); // Utilise le slice que tu as créé
+  // FETCH LES HOTELS DEPUIS FIREBASE
+  useEffect(() => {
+    const fetchHotels = async () => {
+      // dispatch(fetchEtabsStart());
+      // try {
+      //   const hotelsCollection = collection(db, "etablissement");
+      //   const hotelsSnapshot = await getDocs(hotelsCollection);
+      //   const hotelsList = hotelsSnapshot.docs.map((doc) => ({
+      //     id: doc.id,
+      //     ...doc.data(),
+      //   }));
+      //   dispatch(fetchEtabsSuccess(hotelsList)); //MAJ STORE AVEC LES HOTELS FETCHES
+      //   console.log("hotel list du dispatch", hotelsList);
+      // }
+      try {
+        const data = await getEtab();
+        const serializedData = serializeFirestoreData(data);
+        dispatch(fetchEtabsSuccess(serializedData));
+      } catch (error) {
+        dispatch(fetchEtabsFailure(error.message));
+      }
+    };
+
+    fetchHotels();
+  }, [dispatch]);
+
   return (
     <div className="hotelPageContainer">
       <Header />
-      <h1>Page des hôtels</h1>
-      <div className="hotelList">
-        <div className="hotelCard">
-          <h2>Nom de l'établissement</h2>
-          <p>Description</p>
-          <p>Prix</p>
-          <p>Nombre d'étoiles</p>
+      <h1>Nos Hôtels</h1>
+      {isLoading ? (
+        <p>Chargement des hôtels...</p>
+      ) : error ? (
+        <p>Erreur: {error}</p>
+      ) : (
+        <div className="hotelList">
+          {etabs.length === 0 ? (
+            <p>Aucun hôtel disponible.</p>
+          ) : (
+            etabs.map((hotel) => (
+              <div className="hotelCard" key={hotel.id}>
+                <h2>{hotel.nom}</h2>
+                <p>{hotel.id}</p>
+                {/* <p>{hotel.description}</p>
+                <p>Prix: {hotel.prix} €</p>
+                <p>Étoiles: {hotel.nombreEtoiles}</p> */}
+                <Link to={`/hotel/${hotel.id}`}>Voir détails</Link>
+              </div>
+            ))
+          )}
         </div>
-
-        <div className="hotelCard">
-          <h2>Nom de l'établissement</h2>
-          <p>Description</p>
-          <p>Prix</p>
-          <p>Nombre d'étoiles</p>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

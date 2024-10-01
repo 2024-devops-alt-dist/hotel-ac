@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-//import { RouterProvider } from "react-router-dom";
-//import Router from "./routes/Router";
 
 //redux
 import { Provider } from "react-redux";
@@ -11,15 +9,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import searchEtabsSlice from "./redux/actions/searchEtabAction";
 import App from "./App";
 import "./index.css";
-import { auth } from "./firebase/firebase-config";
 import authSlice from "./redux/actions/authAction";
+import etabSlice from "./redux/actions/etabAction";
 
 //import addEtabSlice from "./redux/actions/addEtabAction";
 
 const store = configureStore({
   reducer: {
-    searchEtabs: searchEtabsSlice,
+    etabs: searchEtabsSlice,
     auth: authSlice,
+    fetchEtabs: etabSlice,
     //addEtab: addEtabSlice,
   },
 });

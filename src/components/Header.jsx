@@ -42,13 +42,14 @@ function Header({ signUp, signIn }) {
     try {
       await signOut(auth);
       navigate("/");
-      setUser(null); // Remet à jour l'état de l'utilisateur à null après la déconnexion
+      //MAJ STATE USER A NULL APRES DECO
+      setUser(null);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // useEffect pour surveiller les changements d etat d auth
+  // USEEFFET POUR ECOUTER LE CHANGEMENT D'ETAT D UN USER
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
@@ -60,7 +61,7 @@ function Header({ signUp, signIn }) {
       }
     });
 
-    // Nettoyer l'écouteur lorsqu'on quitte le composant pour éviter les fuites de mémoire
+    // NETTOYAGE DE L'EFFET
     return () => unsubscribe();
   }, []);
 
