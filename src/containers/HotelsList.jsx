@@ -58,6 +58,7 @@ function HotelsList() {
             etabs.map((hotel) => (
               <div className="hotelCard" key={hotel.id}>
                 <h2>{hotel.nom}</h2>
+                <img src={hotel.urlPhotoPrincipale} alt={hotel.nom} />
 
                 <p>Prix: {hotel.prix} €</p>
                 <p>Étoiles: {hotel.nbEtoiles}</p>
