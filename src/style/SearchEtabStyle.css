@@ -33,18 +33,14 @@
     transform: scale(0.95);
 }
 
-.searchResults p {
-    color: #2c3e50;
-    font-size: 1.2rem;
-
-    font-weight: bold;
-
-    margin-top: 20px;
-    padding: 1rem;
+.searchResultItem {
     background-color: #fff;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 1rem;
     border-radius: 5px;
     text-align: center;
-
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../style/SearchEtabStyle.css";
 //import { searchEtabSuccess } from "../redux/actions/searchEtabAction";
+import { Link } from "react-router-dom";
 
 function SearchEtab({ etabs }) {
   //stocker la recherche de l'utilisateur
@@ -9,15 +10,16 @@ function SearchEtab({ etabs }) {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (search === "") {
-      console.log("etabs", etabs);
+    if (search.length < 3) {
       setSearchResults([]);
-    } else {
-      const filteredResults = etabs.filter((etab) =>
-        etab.nom.toLowerCase().includes(search.toLowerCase())
-      );
-      setSearchResults(filteredResults);
+      return;
     }
+    const filteredResults = etabs.filter(
+      (etab) =>
+        etab.nom.toLowerCase().includes(search.toLowerCase()) ||
+        etab.adresse?.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResults(filteredResults);
   }, [search, etabs]);
 
   //MAJ valeur de recherche
@@ -32,16 +34,17 @@ function SearchEtab({ etabs }) {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Rechercher un hôtel"
+          placeholder="Rechercher un hôtel..."
         />
-        <button type="submit">🔍</button>
       </form>
       <div className="searchResults">
         {searchResults.length > 0 ? (
           searchResults.map((etab, index) => (
-            <div key={index} className="search-result-item">
-              <h3>{etab.nom}</h3>
-              <p>{etab.adresse}</p>
+            <div key={index} className="searchResultItem">
+              <Link to={`/hotel/${etab.id}`}>
+                <h3>{etab.nom}</h3>
+                <p>{etab.adresse}</p>
+              </Link>
             </div>
           ))
         ) : search !== "" ? (

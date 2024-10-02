@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import { getEtab } from "../firebase/EtabManager";
 
 import { serializeFirestoreData } from "../firebase/firebaseUtils";
+import "../style/ListHotelsStyle.css";
 
 function HotelsList() {
   const dispatch = useDispatch();
@@ -45,29 +46,31 @@ function HotelsList() {
   return (
     <div className="hotelPageContainer">
       <Header />
-      <h1>Nos Hôtels</h1>
-      {isLoading ? (
-        <p>Chargement des hôtels...</p>
-      ) : error ? (
-        <p>Erreur: {error}</p>
-      ) : (
-        <div className="hotelList">
-          {etabs.length === 0 ? (
-            <p>Aucun hôtel disponible.</p>
-          ) : (
-            etabs.map((hotel) => (
-              <div className="hotelCard" key={hotel.id}>
-                <h2>{hotel.nom}</h2>
-                <img src={hotel.urlPhotoPrincipale} alt={hotel.nom} />
+      <div className="listHotelContainer">
+        <h1>Nos Hôtels</h1>
+        {isLoading ? (
+          <p>Chargement des hôtels...</p>
+        ) : error ? (
+          <p>Erreur: {error}</p>
+        ) : (
+          <div className="hotelList">
+            {etabs.length === 0 ? (
+              <p>Aucun hôtel disponible.</p>
+            ) : (
+              etabs.map((hotel) => (
+                <div className="hotelCard" key={hotel.id}>
+                  <h2>{hotel.nom}</h2>
+                  <img src={hotel.urlPhotoPrincipale} alt={hotel.nom} />
 
-                <p>Prix: {hotel.prix} €</p>
-                <p>Étoiles: {hotel.nbEtoiles}</p>
-                <Link to={`/hotel/${hotel.id}`}>Voir détails</Link>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+                  <p>Prix: {hotel.prix} €</p>
+                  <p>Étoiles: {hotel.nbEtoiles}</p>
+                  <Link to={`/hotel/${hotel.id}`}>Voir détails</Link>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
