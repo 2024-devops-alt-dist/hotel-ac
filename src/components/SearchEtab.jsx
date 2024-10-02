@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../style/SearchEtabStyle.css";
 //import { searchEtabSuccess } from "../redux/actions/searchEtabAction";
 
 function SearchEtab({ etabs }) {
@@ -25,7 +26,7 @@ function SearchEtab({ etabs }) {
   };
 
   return (
-    <div className="search-etab">
+    <div className="searchEtab">
       <form onSubmit={handleSearchChange}>
         <input
           type="text"
@@ -35,19 +36,17 @@ function SearchEtab({ etabs }) {
         />
         <button type="submit">🔍</button>
       </form>
-      <div className="search-results">
-        {search === "" ? (
-          <p>Renseignez un établissement.</p>
-        ) : searchResults.length > 0 ? (
+      <div className="searchResults">
+        {searchResults.length > 0 ? (
           searchResults.map((etab, index) => (
             <div key={index} className="search-result-item">
               <h3>{etab.nom}</h3>
               <p>{etab.adresse}</p>
             </div>
           ))
-        ) : (
+        ) : search !== "" ? (
           <p>Aucun résultat trouvé.</p>
-        )}
+        ) : null}
       </div>
     </div>
   );

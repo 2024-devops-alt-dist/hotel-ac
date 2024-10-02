@@ -1,0 +1,50 @@
+.searchEtab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.searchEtab input {
+    height: 2rem;
+    width: 20rem;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.searchEtab button {
+    background-color: #ffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 10px;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.searchEtab button:hover {
+    background-color: #f39c12;
+}
+
+.searchEtab button:active {
+    transform: scale(0.95);
+}
+
+.searchResults p {
+    color: #2c3e50;
+    font-size: 1.2rem;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+}

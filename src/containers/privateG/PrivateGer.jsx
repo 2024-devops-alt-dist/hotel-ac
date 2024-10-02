@@ -3,7 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 
-export default function PrivateGerant() {
+export default function PrivateGer() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const gerant = useSelector((state) => state.auth.gerant);
 

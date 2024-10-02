@@ -16,7 +16,9 @@ function Home({ etabs }) {
 
       <div className="presentation">
         <div className="bannerImg">
-          <SearchEtab etabs={etabs} />
+          <div className="searchContainer">
+            <SearchEtab etabs={etabs} />
+          </div>
         </div>
         <h2 className="presentationTitle">Lorem Ipsum</h2>
         <p className="presentationText">

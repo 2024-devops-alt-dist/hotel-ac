@@ -43,6 +43,22 @@ body {
 }
 
 
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 12rem;
+}
+
+.hotels h2 {
+    color: #fcd53f;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+}
+
 @media (max-width: 768px) {
 
     .presentationText {

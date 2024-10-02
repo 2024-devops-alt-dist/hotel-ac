@@ -12,9 +12,9 @@ import Gerant from "./containers/Gerant";
 import Error404 from "./containers/Error404";
 import HotelsList from "./containers/HotelsList";
 import Private from "./containers/private/Private";
-import PrivateGerant from "./containers/private/PrivateGerant";
 import PrivateHome from "./containers/private/privateHome/PrivateHome";
-import PrivateHomeGerant from "./containers/private/privateHome/PrivateHomeGerant";
+import PrivateGer from "./containers/privateG/PrivateGer";
+import PrivateHomeGer from "./containers/privateG/privateHomeGer/PrivateHomeGer";
 import HotelDetails from "./containers/HotelDetails";
 
 function App() {
@@ -51,15 +51,18 @@ function App() {
           <Routes>
             <Route path="/" element={<Home etabs={etabs} />} />
 
-            <Route path="/PrivateGerant" element={<PrivateGerant />}>
-              <Route path="PrivateHomeGerant" element={<PrivateHomeGerant />} />
-            </Route>
-
-            <Route path="/gerant" element={<Gerant />} />
-
             <Route path="/private" element={<Private />}>
               <Route path="/private/PrivateHome" element={<PrivateHome />} />
             </Route>
+
+            <Route path="/PrivateG" element={<PrivateGer />}>
+              <Route
+                path="privateG/PrivateHomeG"
+                element={<PrivateHomeGer />}
+              />
+            </Route>
+
+            <Route path="/gerant" element={<Gerant />} />
 
             <Route path="*" element={<Error404 />} />
             <Route path="/nosHotels" element={<HotelsList etabs={etabs} />} />

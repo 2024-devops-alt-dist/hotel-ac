@@ -58,10 +58,9 @@ function HotelsList() {
             etabs.map((hotel) => (
               <div className="hotelCard" key={hotel.id}>
                 <h2>{hotel.nom}</h2>
-                <p>{hotel.id}</p>
-                {/* <p>{hotel.description}</p>
+
                 <p>Prix: {hotel.prix} €</p>
-                <p>Étoiles: {hotel.nombreEtoiles}</p> */}
+                <p>Étoiles: {hotel.nbEtoiles}</p>
                 <Link to={`/hotel/${hotel.id}`}>Voir détails</Link>
               </div>
             ))

@@ -1,6 +1,6 @@
 import React from "react";
 
-function PrivateHomeGerant() {
+function PrivateHomeGer() {
   return (
     <div>
       <h1>HELLO PRIVATE GERANT ! </h1>
@@ -8,4 +8,4 @@ function PrivateHomeGerant() {
   );
 }
 
-export default PrivateHomeGerant;
+export default PrivateHomeGer;

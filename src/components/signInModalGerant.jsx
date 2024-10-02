@@ -37,7 +37,7 @@ const ModalOverlayGerant = ({ isClose }) => {
       );
 
       console.log("Gérant connecté:", gerantData);
-      navigate("/private/PrivateHomeGerant");
+      navigate("/privateG/privateHomeGer");
       isClose();
     } catch (error) {
       dispatch(loginGerantFailure(error.message));
