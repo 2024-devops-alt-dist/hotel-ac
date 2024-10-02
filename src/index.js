@@ -11,6 +11,7 @@ import App from "./App";
 import "./index.css";
 import authSlice from "./redux/actions/authAction";
 import etabSlice from "./redux/actions/etabAction";
+import authGerantAction from "./redux/actions/authGerantAction";
 
 //import addEtabSlice from "./redux/actions/addEtabAction";
 
@@ -19,6 +20,7 @@ const store = configureStore({
     etabs: searchEtabsSlice,
     auth: authSlice,
     fetchEtabs: etabSlice,
+    authGerant: authGerantAction,
     //addEtab: addEtabSlice,
   },
 });

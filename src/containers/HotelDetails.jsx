@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 
+import Header from "../components/Header";
+
 function HotelDetails() {
   //RECUP DEUIS L'URL
   const { id } = useParams();
@@ -28,12 +30,13 @@ function HotelDetails() {
 
   return (
     <div>
+      <Header />
       <h1>{hotel.nom}</h1>
-      {/* <p>Description: {hotel.description}</p>
+      <p>Description: {hotel.description}</p>
       <p>Prix: {hotel.prix} €</p>
       <p>Adresse: {hotel.adresse}</p>
       <p>Ville: {hotel.ville}</p>
-      <p>Nombre d'étoiles: {hotel.nombreEtoiles}</p> */}
+      <p>Nombre d'étoiles: {hotel.nbEtoiles}</p>
     </div>
   );
 }

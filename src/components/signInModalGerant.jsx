@@ -1,52 +1,49 @@
 import React, { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import "../style/SignUpModalStyle.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { auth } from "../firebase/firebase-config";
 import { useNavigate } from "react-router-dom";
 import {
-  loginSuccess,
-  loginFailure,
-  setLoading,
-} from "../redux/actions/authAction";
+  loginGerantSuccess,
+  loginGerantFailure,
+  setLoadingGerant,
+} from "../redux/actions/authGerantAction";
+import { signInGerant } from "../firebase/authGerant";
 
-// Composant pour l'overlay de la modale
-const ModalOverlay = ({ isClose }) => {
+const ModalOverlayGerant = ({ isClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [validation, setValidation] = useState("");
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleSignIn = async (e) => {
+  const handleSignInGerant = async (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));
+    dispatch(setLoadingGerant(true));
 
     try {
-      // Co avec Firebase
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
+      // Co GERANT
+      const gerantData = await signInGerant(
         emailRef.current.value,
         passwordRef.current.value
       );
 
-      // co ok => maj state redux
+      // CO OK => maj state redux
       dispatch(
-        loginSuccess({
-          email: userCredential.user.email,
-          uid: userCredential.user.uid,
+        loginGerantSuccess({
+          email: gerantData.email,
+          uid: gerantData.id,
         })
       );
 
-      console.log("User connected:", userCredential.user);
-      navigate("/private/PrivateHome");
+      console.log("Gérant connecté:", gerantData);
+      navigate("/private/PrivateHomeGerant");
       isClose();
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      dispatch(loginGerantFailure(error.message));
       setValidation("Erreur lors de la connexion: " + error.message);
     } finally {
-      dispatch(setLoading(false));
+      dispatch(setLoadingGerant(false));
     }
   };
 
@@ -61,13 +58,13 @@ const ModalOverlay = ({ isClose }) => {
       <div className="modalDialog">
         <div className="modalContent">
           <div className="modalHeader">
-            <h3>Connexion</h3>
+            <h3>Connexion Gérant</h3>
             <button className="close-btn" onClick={isClose}>
               ✖️
             </button>
           </div>
           <div className="modalBody">
-            <form className="signInForm" onSubmit={handleSignIn}>
+            <form className="signInForm" onSubmit={handleSignInGerant}>
               <label htmlFor="signInEmail">Email</label>
               <input
                 type="email"
@@ -100,13 +97,13 @@ const ModalOverlay = ({ isClose }) => {
   );
 };
 
-const SignInModal = ({ isOpen, isClose }) => {
+const SignInModalGerant = ({ isOpen, isClose }) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <ModalOverlay isClose={isClose} />,
+    <ModalOverlayGerant isClose={isClose} />,
     document.getElementById("modal-root")
   );
 };
 
-export default SignInModal;
+export default SignInModalGerant;
