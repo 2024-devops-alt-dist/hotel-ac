@@ -1,30 +1,32 @@
 import { getDoc, query, where, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config"; // Import Firestore
 
-// CO gERANT
+// CO GÉRANT
 export const signInGerant = async (email, password) => {
   try {
-    // REQUETE GERANT <==> EMAIL
-    const gerantsRef = collection(db, "gerant");
-    const q = query(gerantsRef, where("email", "==", email));
+    // REQUETE USER <==> EMAIL
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("email", "==", email));
 
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-      throw new Error("Aucun gérant trouvé avec cet email");
+      throw new Error("Aucun utilisateur trouvé avec cet email");
     }
 
     // VERIF MOT DE PASSE ET STOKER
     let gerantData = null;
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      if (data.motDePasse === password) {
+
+      // Vérification du rôle
+      if (data.role === "gerant" && data.motDePasse === password) {
         gerantData = { ...data, id: doc.id };
       }
     });
 
     if (!gerantData) {
-      throw new Error("Mot de passe incorrect");
+      throw new Error("Mot de passe incorrect ou utilisateur non autorisé");
     }
 
     return gerantData;

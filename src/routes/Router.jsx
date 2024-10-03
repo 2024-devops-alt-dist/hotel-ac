@@ -5,7 +5,7 @@ import Gerant from "../containers/Gerant";
 import Error from "../containers/Error404";
 import HotelsList from "../containers/HotelsList";
 import HotelDetails from "../containers/HotelDetails";
-//import Test from "../containers/Test";
+import Test from "../containers/Test";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,8 @@ const router = createBrowserRouter([
     path: "*",
     element: <Error />,
   },
+
+  { path: "/test", element: <Test /> },
 ]);
 
 function Router() {

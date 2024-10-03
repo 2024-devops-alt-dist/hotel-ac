@@ -15,6 +15,9 @@ export const signUp = async (email, password, userData) => {
       password
     );
 
+    //CREER UN ROLE PAR DEFAULT CLIENT
+    userData.role = "client";
+
     // METTRE LES INFOS DANS FIRESTORE
     await setDoc(doc(db, "users", userCredential.user.uid), userData);
     return userCredential;
@@ -28,9 +31,30 @@ export const signIn = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-// OBSERVER CHANGMENT D ETAT DU USER
 export const observeAuthState = (callback) => {
-  return onAuthStateChanged(auth, callback);
+  return onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          callback({ ...user, role: userData.role }); // Utilisateur avec rôle
+        } else {
+          console.warn("Utilisateur sans document Firestore");
+          callback(user); // Utilisateur connecté mais sans document Firestore
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération du document Firestore:",
+          error
+        );
+        callback(user); // Retourner l'utilisateur même en cas d'erreur Firestore
+      }
+    } else {
+      callback(user); // Aucun utilisateur connecté
+    }
+  });
 };
 
 // RECUP INFOS DE USER

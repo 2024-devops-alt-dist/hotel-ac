@@ -17,6 +17,7 @@ const authSlice = createSlice({
       state.user = {
         email: action.payload.email,
         uid: action.payload.uid,
+        role: action.payload.role,
       };
       state.isLoading = false;
       state.error = null;

@@ -4,6 +4,8 @@ import "../style/SignUpModalStyle.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { auth } from "../firebase/firebase-config";
+import { db } from "../firebase/firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
   loginSuccess,
@@ -24,23 +26,39 @@ const ModalOverlay = ({ isClose }) => {
     dispatch(setLoading(true));
 
     try {
-      // Co avec Firebase
+      // Co Firebase
       const userCredential = await signInWithEmailAndPassword(
         auth,
         emailRef.current.value,
         passwordRef.current.value
       );
 
-      // co ok => maj state redux
-      dispatch(
-        loginSuccess({
-          email: userCredential.user.email,
-          uid: userCredential.user.uid,
-        })
-      );
+      const userRef = doc(db, "users", userCredential.user.uid);
+      const userDoc = await getDoc(userRef);
+
+      // MAJ STATE REDUX SI USER EXISTRE
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log("userData", userData);
+        console.log("role", userData.role);
+        dispatch(
+          loginSuccess({
+            email: userCredential.user.email,
+            uid: userCredential.user.uid,
+            role: userData.role,
+          })
+        );
+      } else {
+        console.log("Aucun document correspondant !");
+      }
 
       console.log("User connected:", userCredential.user);
-      navigate("/private/PrivateHome");
+      if (userDoc.exists() && userDoc.data().role === "gerant") {
+        navigate("/privateG/privateHomeGer");
+      } else {
+        navigate("/private/privateHome");
+      }
+
       isClose();
     } catch (error) {
       dispatch(loginFailure(error.message));
@@ -88,7 +106,7 @@ const ModalOverlay = ({ isClose }) => {
                 ref={passwordRef}
                 required
               />
-              {validation && <p className="error">{validation}</p>}{" "}
+              {validation && <p className="error">{validation}</p>}
               <button type="submit" className="submit-btn">
                 Se connecter
               </button>

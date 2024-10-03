@@ -14,6 +14,7 @@ function SearchEtab({ etabs }) {
       setSearchResults([]);
       return;
     }
+    //TODO : autoriser les accents ou non, voire la distance de Levenshtein
     const filteredResults = etabs.filter(
       (etab) =>
         etab.nom.toLowerCase().includes(search.toLowerCase()) ||

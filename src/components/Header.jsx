@@ -49,6 +49,11 @@ function Header({ signUp, signIn }) {
     }
   };
 
+  //RECUPE USER CONNECTE
+  const userConnected = useSelector((state) => state.auth.user);
+  console.log("user connected", userConnected);
+  //RECUPERER LE STATE USER CONNECTE
+
   // USEEFFET POUR ECOUTER LE CHANGEMENT D'ETAT D UN USER
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

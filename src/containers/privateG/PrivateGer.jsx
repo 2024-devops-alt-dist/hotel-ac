@@ -14,7 +14,7 @@ export default function PrivateGer() {
   return (
     <div className="privateContainer">
       <Header />
-      <h1>Private Route</h1>
+      <h1>Private Route gerant</h1>
       <p>hello {gerant.email}</p>
       <Outlet />
     </div>
