@@ -46,6 +46,8 @@ const ModalOverlay = ({ isClose }) => {
             email: userCredential.user.email,
             uid: userCredential.user.uid,
             role: userData.role,
+            nom: userData.nom,
+            prenom: userData.prenom,
           })
         );
       } else {
@@ -54,7 +56,8 @@ const ModalOverlay = ({ isClose }) => {
 
       console.log("User connected:", userCredential.user);
       if (userDoc.exists() && userDoc.data().role === "gerant") {
-        navigate("/privateG/privateHomeGer");
+        navigate("/private/privateHomeDuGerant");
+        // navigate("/test");
       } else {
         navigate("/private/privateHome");
       }

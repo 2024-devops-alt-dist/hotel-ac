@@ -18,6 +18,8 @@ const authSlice = createSlice({
         email: action.payload.email,
         uid: action.payload.uid,
         role: action.payload.role,
+        nom: action.payload.nom,
+        prenom: action.payload.prenom,
       };
       state.isLoading = false;
       state.error = null;

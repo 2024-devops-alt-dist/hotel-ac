@@ -52,6 +52,9 @@ function Header({ signUp, signIn }) {
   //RECUPE USER CONNECTE
   const userConnected = useSelector((state) => state.auth.user);
   console.log("user connected", userConnected);
+  //recupere le nom de l'utilisateur connecté
+  const userConnectedName = userConnected?.nom;
+  console.log("user connected name", userConnectedName);
   //RECUPERER LE STATE USER CONNECTE
 
   // USEEFFET POUR ECOUTER LE CHANGEMENT D'ETAT D UN USER
@@ -80,7 +83,9 @@ function Header({ signUp, signIn }) {
         </h1>
       </a>
 
-      <div className="helloName">{user && <p>Bonjour {user.email}</p>}</div>
+      <div className="helloName">
+        {user && <p>Bonjour {userConnectedName}</p>}
+      </div>
       <div className="burger-menu" onClick={toggleMenu}>
         <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} />
       </div>
