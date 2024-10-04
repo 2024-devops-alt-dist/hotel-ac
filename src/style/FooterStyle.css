@@ -27,11 +27,8 @@
 
 .footerContent h3,
 .footerContent p {
-
     padding: 0 2rem;
 }
-
-
 
 .addressContainer {
     display: flex;
@@ -40,8 +37,6 @@
     margin-left: 3rem;
     font-size: 0.9rem;
 }
-
-
 
 .gerantLink {
     color: rgb(43, 41, 41);
@@ -85,9 +80,8 @@
     padding-bottom: 1rem;
 }
 
-.gerantContainer :hover {
+.gerantContainer:hover {
     color: grey;
-
 }
 
 .gerantLink span {
@@ -105,9 +99,47 @@
     color: white;
     text-decoration: none;
     font-size: 1.5em;
-
 }
 
 .socialMedia a:hover {
     color: #f39c12;
+}
+
+/*media queries*/
+@media (max-width: 768px) {
+
+    .footerContent h3 {
+        display: none;
+    }
+
+    .footerContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .addressContainer {
+        display: none;
+    }
+
+
+    .gerantContainer {
+        margin: 0.5rem 0;
+    }
+
+    .gerantContainer span {
+        padding: 0.5rem 0;
+    }
+
+    .gerantButtons {
+        padding-bottom: 0.5rem;
+    }
+
+    .socialMedia {
+        width: 5rem;
+
+    }
+
+    .socialMedia a {
+        font-size: 1.2em;
+    }
 }

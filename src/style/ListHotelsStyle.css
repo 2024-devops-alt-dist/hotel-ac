@@ -75,6 +75,11 @@
         font-size: 2rem;
     }
 
+    .hotelList {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        margin: 0;
+    }
+
     .hotelCard {
         margin: 10px;
     }
