@@ -55,11 +55,19 @@ const ModalOverlay = ({ isClose }) => {
       }
 
       console.log("User connected:", userCredential.user);
-      if (userDoc.exists() && userDoc.data().role === "gerant") {
-        navigate("/private/privateHomeDuGerant");
+      if (userDoc.exists() && userDoc.data().role === "client") {
+        navigate("/private/privateHome");
         // navigate("/test");
       } else {
-        navigate("/private/privateHome");
+        // navigate("/private/privateHome");
+        alert(
+          "Vous n'êtes pas autorisé à accéder à cette page. Si vous êtes un gérant, veuillez vous connecter sur le lien de connexion des gérants."
+        );
+        dispatch(
+          loginFailure(
+            "Vous n'êtes pas autorisé à accéder à cette page. Si vous êtes un gérant, veuillez vous connecter sur le lien de connexion des gérants."
+          )
+        );
       }
 
       isClose();

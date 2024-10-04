@@ -51,6 +51,11 @@ body {
     top: 12rem;
 }
 
+.hotels {
+    height: 25rem;
+
+}
+
 .hotels h2 {
     color: #fcd53f;
     font-size: 2rem;

@@ -3,13 +3,18 @@ import ReactDOM from "react-dom";
 import "../style/SignUpModalStyle.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase/firebase-config";
+
 import {
-  loginGerantSuccess,
-  loginGerantFailure,
-  setLoadingGerant,
-} from "../redux/actions/authGerantAction";
+  loginSuccess,
+  loginFailure,
+  setLoading,
+} from "../redux/actions/authAction";
 import { signInGerant } from "../firebase/authGerant";
 
+// Composant pour l'overlay de la modale
 const ModalOverlayGerant = ({ isClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,31 +24,54 @@ const ModalOverlayGerant = ({ isClose }) => {
 
   const handleSignInGerant = async (e) => {
     e.preventDefault();
-    dispatch(setLoadingGerant(true));
+    dispatch(setLoading(true));
 
     try {
-      // Co GERANT
-      const gerantData = await signInGerant(
+      // Co Firebase
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
         emailRef.current.value,
         passwordRef.current.value
       );
 
-      // CO OK => maj state redux
-      dispatch(
-        loginGerantSuccess({
-          email: gerantData.email,
-          uid: gerantData.id,
-        })
-      );
+      const userRef = doc(db, "users", userCredential.user.uid);
+      const userDoc = await getDoc(userRef);
 
-      console.log("Gérant connecté:", gerantData);
-      navigate("/privateG/privateHomeGer");
+      // MAJ STATE REDUX SI USER EXISTRE
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log("userData", userData);
+        console.log("role", userData.role);
+        dispatch(
+          loginSuccess({
+            email: userCredential.user.email,
+            uid: userCredential.user.uid,
+            role: userData.role,
+            nom: userData.nom,
+            prenom: userData.prenom,
+          })
+        );
+      } else {
+        console.log("Aucun document correspondant !");
+      }
+
+      console.log("User connected:", userCredential.user);
+      if (userDoc.exists() && userDoc.data().role === "gerant") {
+        navigate("/private/privateHomeDuGerant");
+        // navigate("/test");
+      } else {
+        // navigate("/private/privateHome");
+        alert("Vous n'êtes pas un gérant");
+        // vider le user connecté
+        dispatch(loginFailure("Vous n'êtes pas un gérant"));
+      }
+
       isClose();
     } catch (error) {
-      dispatch(loginGerantFailure(error.message));
+      dispatch(loginFailure(error.message));
       setValidation("Erreur lors de la connexion: " + error.message);
     } finally {
-      dispatch(setLoadingGerant(false));
+      dispatch(setLoading(false));
     }
   };
 

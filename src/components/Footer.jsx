@@ -81,21 +81,27 @@ export default function Footer({ signIn }) {
           </div>
         </div>
         <div className="gerantContainer">
-          <button className="gerantLink" onClick={openSignInModal}>
-            Connexion
-          </button>
-          <button className="logoutButton" onClick={logOut}>
-            Déconnexion
-          </button>
-          <a href="/gerant" className="gerantLink">
+          <span>
+            Espace gérant <FontAwesomeIcon icon={faLock} />
+          </span>
+
+          <div className="gerantButtons">
+            <button className="gerantLink" onClick={openSignInModal}>
+              Connexion
+            </button>
+            <button className="gerantLink" onClick={logOut}>
+              Déconnexion
+            </button>
+            {/* <a href="/gerant" className="gerantLink">
             <FontAwesomeIcon icon={faLock} />
             <span>Espace gérant</span>
-          </a>
-          <SignInModalGerant
-            isOpen={isSignInModalOpen}
-            isClose={closeSignInModal}
-            signIn={signIn}
-          />
+          </a> */}
+            <SignInModalGerant
+              isOpen={isSignInModalOpen}
+              isClose={closeSignInModal}
+              signIn={signIn}
+            />
+          </div>
         </div>
       </footer>
     </div>

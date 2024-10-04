@@ -32,11 +32,6 @@ function Home({ etabs }) {
         <div className="hotel">
           {/* FILTRER DANS LE DIAPO ? si oui ne pas oublier le useEffect  <Diapo etabs={searchResults} />{" "} */}
           <Diapo etabs={etabs} />
-          <h3>Find Us</h3>
-          <p>
-            - soit mettre une carte avec plusieurs points avec Google API - soit
-            mettre une carte avec un seul point tranquillou
-          </p>
         </div>
         <div className="map"></div>
         <Footer />
