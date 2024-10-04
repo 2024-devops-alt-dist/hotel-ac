@@ -4,64 +4,106 @@
     align-items: center;
     position: relative;
     width: 80%;
+    max-width: 1200px;
     overflow: hidden;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 .diapo {
-    width: 100%;
+    width: 70%;
+    overflow: hidden;
+}
+
+.diapo a {
+    text-decoration: none;
+    color: #333;
 }
 
 .diapo-inner {
     display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .box {
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    flex: 0 0 calc(100% / 3);
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 1rem;
-    /* Chaque boîte occupe un tiers de l'espace visible */
-    height: 150px;
+    flex: 0 0 calc(100% / 3 - 2rem);
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
 }
+
+.box img {
+    width: auto;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.hotel {
+    height: 25rem;
+}
+
+.box:hover {
+    transform: translateY(-10px);
+}
+
+.hotel-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+
+.hotel-info {
+    padding: 1rem;
+}
+
+.hotel-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.hotel-info p {
+    font-size: 1rem;
+    color: #666;
+}
+
 
 .chevron {
     background: none;
     border: none;
-    color: #fff;
+    color: #333;
     font-size: 2em;
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.chevron:hover {
+    color: #007bff;
 }
 
 .chevron-left {
-    left: 10px;
+    left: 100px;
 }
 
 .chevron-right {
-    right: 10px;
+    right: 100px;
 }
 
 .chevron:focus {
     outline: none;
-}
-
-.chevron:hover {
-    color: #ddd;
-}
-
-.hotel-photo {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
 }

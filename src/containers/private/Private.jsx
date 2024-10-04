@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
+import "../../style/PrivateStyle.css";
 
 export default function Private() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -12,11 +13,15 @@ export default function Private() {
   }
 
   return (
-    <div className="privateContainer">
+    <div className="RoutePriveeContainer">
       <Header />
-      <h1>Private Route</h1>
-      <p>hello {user.email}</p>
-      <Outlet />
+      <div className="privateContainer">
+        <h1 className="privateTitle">Espace privé</h1>
+        <p>
+          hello {user.prenom} {user.nom}
+        </p>
+        <Outlet />
+      </div>
     </div>
   );
 }

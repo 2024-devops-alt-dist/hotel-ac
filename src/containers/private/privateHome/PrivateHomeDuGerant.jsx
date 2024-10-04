@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getImgPrincipaleList, uploadImgPrincipale } from "../../../img/img";
 import { getImgVignettesList, uploadImgVignette } from "../../../img/img";
+import "../../../style/PrivateGerantStyle.css";
 
 function PrivateHomeDuGerant() {
   const [imageUpload, setImageUpload] = useState(null);
@@ -46,7 +47,7 @@ function PrivateHomeDuGerant() {
   };
 
   return (
-    <div className="gerantContainer">
+    <div className="privateGerantContainer">
       <h1>Page du Gérant</h1>
       <div className="uploadImg">
         <input
@@ -56,6 +57,12 @@ function PrivateHomeDuGerant() {
         />
         <button onClick={handleUpload}>Envoyer l'image principale</button>
       </div>
+      <div className="imgList">
+        {imgVignettesList.map((url, index) => (
+          <img src={url} key={index} alt="hotel" />
+        ))}
+      </div>
+
       <div className="uploadImgVignette">
         <input
           type="file"
@@ -64,12 +71,6 @@ function PrivateHomeDuGerant() {
         />
         <button onClick={handleVignettesUpload}>Envoyer la vignette</button>
       </div>
-      <div className="imgList">
-        {imgVignettesList.map((url, index) => (
-          <img src={url} key={index} alt="hotel" />
-        ))}
-      </div>
-
       <div className="imgList">
         {imgList.map((url, index) => (
           <img src={url} key={index} alt="hotel" />

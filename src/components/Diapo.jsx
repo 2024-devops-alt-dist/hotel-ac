@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+
 import {
   faChevronLeft,
   faChevronRight,
@@ -24,6 +26,9 @@ function Diapo({ etabs }) {
     return <p>chargement...</p>;
   }
 
+  console.log("etabs", etabs);
+  console.log("etab[0] user ?", etabs[0].id);
+
   return (
     <div className="diapo-container">
       <button className="chevron chevron-left" onClick={handlePrev}>
@@ -40,16 +45,15 @@ function Diapo({ etabs }) {
         >
           {etabs.map((etab, index) => (
             <div className="box" key={index}>
-              <img
-                src={etab.urlPhotoPrincipale}
-                alt={etab.nom}
-                className="hotel-photo"
-              />
-              {/* <p>{etab.description}</p>
-              <p>{etab.prix} €</p>
-              <p>{etab.adresse}</p>
-              <p>{etab.ville}</p>
-              <p>{etab.pays}</p> */}
+              <Link to={`/hotel/${etab.id}`}>
+                <img
+                  src={etab.urlPhotoPrincipale}
+                  alt={etab.nom}
+                  className="hotel-photo"
+                />
+                {<p>{etab.ville}</p>}
+                <h3>{etab.nom}</h3>
+              </Link>
             </div>
           ))}
         </div>
