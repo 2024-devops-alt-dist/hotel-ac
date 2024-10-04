@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import "../style/DetailsHotelStyle.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../components/Footer";
 
 import Header from "../components/Header";
 
@@ -38,7 +41,15 @@ function HotelDetails() {
         <p>{hotel.description}</p>
         {/* <p>{hotel.prix} €</p> */}
         <p>{hotel.adresse}</p>
-        <p>Nombre d'étoiles: {hotel.nbEtoiles}</p>
+        <div className="stars">
+          {Array.from({ length: hotel.nbEtoiles }).map((_, i) => (
+            <FontAwesomeIcon
+              icon={faStar}
+              key={i}
+              style={{ color: "#ffc107" }}
+            />
+          ))}
+        </div>{" "}
       </div>
       <div className="imgVignettes">
         {hotel.vignettes.map((vignetteUrl, index) => (
@@ -55,6 +66,7 @@ function HotelDetails() {
           <div dangerouslySetInnerHTML={{ __html: hotel.iframe }} />
         )}
       </div>
+      <Footer />
     </div>
   );
 }

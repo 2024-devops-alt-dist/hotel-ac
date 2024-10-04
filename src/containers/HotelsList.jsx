@@ -6,10 +6,13 @@ import {
   fetchEtabsFailure,
 } from "../redux/actions/etabAction";
 import { collection, getDocs } from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { db } from "../firebase/firebase-config";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { getEtab } from "../firebase/EtabManager";
+import Footer from "../components/Footer";
 
 import { serializeFirestoreData } from "../firebase/firebaseUtils";
 import "../style/ListHotelsStyle.css";
@@ -61,9 +64,15 @@ function HotelsList() {
                 <div className="hotelCard" key={hotel.id}>
                   <h2>{hotel.nom}</h2>
                   <img src={hotel.urlPhotoPrincipale} alt={hotel.nom} />
-
-                  <p>Prix: {hotel.prix} €</p>
-                  <p>Étoiles: {hotel.nbEtoiles}</p>
+                  <div className="stars">
+                    {Array.from({ length: hotel.nbEtoiles }).map((_, i) => (
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        key={i}
+                        style={{ color: "#ffc107" }}
+                      />
+                    ))}
+                  </div>{" "}
                   <Link to={`/hotel/${hotel.id}`}>Voir détails</Link>
                 </div>
               ))
@@ -71,6 +80,7 @@ function HotelsList() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

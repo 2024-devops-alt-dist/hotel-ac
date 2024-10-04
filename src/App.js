@@ -9,6 +9,8 @@ import { observeAuthState } from "./firebase/auth";
 // COMPONENTS
 import Home from "./containers/Home";
 import Gerant from "./containers/Gerant";
+import About from "./containers/About";
+import Contact from "./containers/Contact";
 import Error404 from "./containers/Error404";
 import HotelsList from "./containers/HotelsList";
 import Private from "./containers/private/Private";
@@ -72,6 +74,8 @@ function App() {
                 path="/hotel/:id"
                 element={<HotelDetails etabs={etabs} />}
               />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           )}
         </div>

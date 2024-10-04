@@ -52,6 +52,7 @@
     margin: 20px auto;
     border-radius: 10px;
     overflow: hidden;
+    height: 25rem;
 }
 
 .mapContainer iframe {

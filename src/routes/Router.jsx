@@ -6,6 +6,8 @@ import Error from "../containers/Error404";
 import HotelsList from "../containers/HotelsList";
 import HotelDetails from "../containers/HotelDetails";
 import Test from "../containers/Test";
+import About from "../containers/About";
+import Contact from "../containers/Contact";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
   },
 
   { path: "/test", element: <Test /> },
+
+  { path: "/about", element: <About /> },
+
+  { path: "/contact", element: <Contact /> },
 ]);
 
 function Router() {

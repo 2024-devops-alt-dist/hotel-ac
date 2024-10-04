@@ -92,7 +92,7 @@ function Header({ signUp, signIn }) {
       <nav className={menuOpen ? "nav-open" : ""}>
         <ul className={menuOpen ? "nav-links active" : "nav-links"}>
           <li>
-            <a href="#apropos" onClick={() => setMenuOpen(false)}>
+            <a href="/about" onClick={() => setMenuOpen(false)}>
               À propos
             </a>
           </li>
@@ -102,7 +102,7 @@ function Header({ signUp, signIn }) {
             </Link>
           </li>
           <li>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
+            <a href="/contact" onClick={() => setMenuOpen(false)}>
               Contact
             </a>
           </li>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import {
   faChevronLeft,
@@ -27,7 +28,6 @@ function Diapo({ etabs }) {
   }
 
   console.log("etabs", etabs);
-  console.log("etab[0] user ?", etabs[0].id);
 
   return (
     <div className="diapo-container">
@@ -53,6 +53,15 @@ function Diapo({ etabs }) {
                 />
                 {<p>{etab.ville}</p>}
                 <h3>{etab.nom}</h3>
+                <div className="stars">
+                  {Array.from({ length: etab.nbEtoiles }).map((_, i) => (
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      key={i}
+                      style={{ color: "#ffc107" }}
+                    />
+                  ))}
+                </div>{" "}
               </Link>
             </div>
           ))}
