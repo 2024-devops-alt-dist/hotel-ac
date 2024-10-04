@@ -32,7 +32,7 @@ function HotelsList() {
       //     ...doc.data(),
       //   }));
       //   dispatch(fetchEtabsSuccess(hotelsList)); //MAJ STORE AVEC LES HOTELS FETCHES
-      //   console.log("hotel list du dispatch", hotelsList);
+      //   console.log("hotel list dispatch", hotelsList);
       // }
       try {
         const data = await getEtab();
