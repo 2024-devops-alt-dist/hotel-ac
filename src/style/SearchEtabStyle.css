@@ -44,3 +44,12 @@
     border-radius: 5px;
     text-align: center;
 }
+
+/*media queries*/
+@media screen and (max-width: 768px) {
+    .searchContainer {
+        top: 20rem;
+        margin-top: 20px;
+
+    }
+}

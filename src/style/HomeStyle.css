@@ -100,4 +100,9 @@ body {
     .bannerImg {
         height: 50vh;
     }
+
+    .hotels h2 {
+        padding: 0 1rem;
+    }
+
 }
